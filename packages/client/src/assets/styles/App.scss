@@ -19,6 +19,28 @@ li {
   list-style-type: none;
 }
 
+.root-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+}
+
+.left-image {
+  width: 100%;
+  min-height: 100%;
+  background: $color-overlay;
+  background: url('@assets/images/background/bg-left.jpg') no-repeat center;
+  background-size: cover;
+}
+
+.right-image {
+  width: 100%;
+  min-height: 100%;
+  background: $color-overlay;
+  background: url('@assets/images/background/bg-right.jpg') no-repeat center;
+  background-size: cover;
+}
+
 #root {
   position: relative;
   display: flex;
