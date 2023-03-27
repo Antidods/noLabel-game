@@ -1,13 +1,16 @@
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@components/Button';
 import { Rating } from '@components/Leaderboard';
 import { LogoText } from '@components/LogoText';
+import { currentUser } from '@store/selectors';
 import { Spacer } from '@ui/Spacer';
 
 import './index.scss';
 import '@assets/styles/App.scss';
 
 export const StartScreen = () => {
+  const user = useSelector(currentUser);
   const navigate = useNavigate();
 
   return (
@@ -16,14 +19,16 @@ export const StartScreen = () => {
         <LogoText />
         <Button
           text='Начать игру'
-          onClick={() => navigate('/login')}
+          onClick={() => navigate('/game')}
           className='button button_primary'
           style={{ margin: 20 }}
         />
 
-        <Link className='plane-link' to='/registration' style={{ marginBottom: 20 }}>
-          Нет аккаунта?
-        </Link>
+        {!user.id && (
+          <Link className='plane-link' to='/registration' style={{ marginBottom: 20 }}>
+            Нет аккаунта?
+          </Link>
+        )}
         <Spacer />
       </div>
       <div className='container colum-3' style={{ paddingLeft: 20 }}>
