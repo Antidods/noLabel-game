@@ -26,7 +26,7 @@
       "@store/*": ["src/store/*"],
       "@game/*": ["src/game/*"],
       "@typings/*": ["typings/*"],
-      "@utils/*": ["utils/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"],

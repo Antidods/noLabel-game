@@ -8,7 +8,7 @@ import { Error404 } from '@pages/Errors/404';
 import { Forum } from '@pages/Forum';
 import { ForumTheme } from '@pages/Forum/ForumTheme';
 import { Game } from '@pages/Game';
-import { Rating } from '@pages/Leaderboard';
+import { LeaderboardPage } from '@pages/Leaderboard';
 import { Login } from '@pages/Login';
 import { Profile } from '@pages/Profile';
 import { ChangeAvatar } from '@pages/Profile/ChangeAvatar';
@@ -35,7 +35,6 @@ export const Layout = () => {
         <Route path='/' element={<StartScreen />} />
         <Route path='/login' element={<Login />} />
         <Route path='/registration' element={<Register />} />
-        <Route path='/rating' element={<Rating />} />
         <Route path='/about' element={<AboutUs />} />
         <Route path='/devpage' element={<DevPage />} />
         <Route element={<RequireAuth />}>
@@ -44,6 +43,7 @@ export const Layout = () => {
           <Route path='/profile/change-avatar' element={<ChangeAvatar />} />
           <Route path='/forum' element={<Forum />} />
           <Route path='/forum/:id' element={<ForumTheme />} />
+          <Route path='/rating' element={<LeaderboardPage />} />
           <Route path='/profile/edit' element={<ChangeProfile />} />
           <Route path='/game' element={<Game />} />
         </Route>

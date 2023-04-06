@@ -6,7 +6,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    width: 20px;
+    min-width: 20%;
     min-height: 35px;
     margin: 10px 0;
     padding: 0 10px;
@@ -20,21 +20,14 @@
     border-radius: 5px;
     box-shadow: 0 0 7px rgb(255 255 255 / 78%);
 
-    // Анимация
+    &-text {
+      overflow: visible;
+      white-space: nowrap;
+    }
 
     @keyframes load {
       0% {
-        width: 0;
-      }
-    }
-    @keyframes load {
-      0% {
-        width: 0;
-      }
-    }
-    @keyframes load {
-      0% {
-        width: 0;
+        width: 20%;
       }
     }
 

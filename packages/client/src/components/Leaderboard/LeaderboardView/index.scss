@@ -12,7 +12,8 @@
   text-transform: capitalize;
 
   &__number {
-    width: 50px;
+    width: 20px;
+    margin-right: 10px;
     font-size: 26px;
   }
 
@@ -20,7 +21,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    width: 220px;
+    width: 260px;
   }
 
   &__score {
@@ -30,12 +31,12 @@
   }
 
   &__image {
-    width: 50px;
-    margin-left: 50px;
+    width: 40px;
+    margin: 0;
   }
 
   &__name {
-    margin-left: 32px;
+    margin-left: 10px;
     overflow: hidden;
     font-size: 26px;
     white-space: nowrap;

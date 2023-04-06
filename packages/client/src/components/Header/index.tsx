@@ -1,36 +1,25 @@
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { removeUser } from '@components/Autification/slice';
+import { logOut, removeUser } from '@components/Autification/slice';
 import { Button } from '@components/Button';
+import { clearLeaderboard } from '@components/Leaderboard/slice';
 import { UserCard } from '@components/UserCard';
 import { currentUser } from '@store/selectors';
 import { Spacer } from '@ui/Spacer';
 import { useAppDispatch } from '@utils/hooks/reduxHooks';
-import { showError } from '@utils/ShowError';
 
 import './index.scss';
 
 export const Header = () => {
   const user = useSelector(currentUser);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
-  const logOut = async () => {
+  const handleLogOut = () => {
+    dispatch(logOut());
     dispatch(removeUser());
-    fetch('https://ya-praktikum.tech/api/v2/auth/logout', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(() => {
-        toast.success('Вы вышли из профиля!');
-        navigate('/');
-      })
-      .catch(() => showError());
+    dispatch(clearLeaderboard());
+    navigate('/');
   };
 
   return (
@@ -59,15 +48,11 @@ export const Header = () => {
           ) : (
             <div style={{ cursor: 'pointer' }}>
               <UserCard
-                avatarUrl={
-                  user.avatar
-                    ? `https://ya-praktikum.tech/api/v2/resources${user.avatar}`
-                    : undefined
-                }
+                avatarUrl={user.avatar ? user.avatar : undefined}
                 variant='header'
                 userName={user.login ?? 'Игрок'}
                 clickCard={() => navigate('/profile')}
-                clickButton={logOut}
+                clickButton={handleLogOut}
               />
             </div>
           )}

@@ -1,61 +1,69 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { fetchLeaderboard } from '@components/Leaderboard/slice';
 import { Title } from '@components/Title';
-import { getDataForLeaderBoard } from '@store/selectors';
+import { getDataForLeaderBoard, getLeaderboard, getLeaderboardIsLoading } from '@store/selectors';
+import { LeaderboardType } from '@typings/app.typings';
+import { Loader } from '@ui/Loader';
+import { uuid } from '@utils/generateId';
+import { useAppDispatch } from '@utils/hooks/reduxHooks';
 import classNames from 'classnames';
-
-import rating from './RatingMock';
 
 import './index.scss';
 
-export const Rating = () => {
+export const LeaderboardPage = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchLeaderboard());
+  }, [dispatch]);
+
+  const leaderboardList = useSelector(getLeaderboard) as LeaderboardType;
+  const isLoading = useSelector(getLeaderboardIsLoading);
+
+  const currUser = useSelector(getDataForLeaderBoard);
   // Минимальное и максимальная ширина в % отдельного столбца в гистограмме рейтинга пользователей
   const minWidth = 20;
   const maxWidth = 100;
 
-  const currUser = useSelector(getDataForLeaderBoard);
-
-  let userNumber = 0;
-
   // Переменные для хранения мин и макс значений в рейтинге пользователей
-  let maxValue = 0;
-  let minValue = 1000000;
-
-  // Перебираем массив пользователей для поиска макс и мин значений рейтинга
-  rating.forEach((item) => {
-    if (item.money > maxValue) maxValue = item.money;
-    if (item.money < minValue) minValue = item.money;
-  });
+  const maxValue = leaderboardList[0].towerDefenceScore;
 
   // Коэффициент для конвертации очков рейтинга юзеров в высоту столбца гистограммы
-  const correction = (minValue / maxValue) * maxWidth;
+  const correction = maxWidth / maxValue;
 
-  // Сортируем массив юзеров по очкам рейтинга
-  rating.sort((a, b) => Number(b.money) - Number(a.money));
-
-  const ratingList = rating.map((user) => {
+  const ratingList = leaderboardList.map((user) => {
     // Ограничиваем минимальную ширину столбца гистограммы
-    const width = user.money * correction > minWidth ? user.money * correction : minWidth;
-    userNumber++;
+    const width = Math.floor(
+      user.towerDefenceScore * correction > minWidth
+        ? user.towerDefenceScore * correction
+        : minWidth
+    );
 
     // Класс leaderboard__user_current служит для выделения очков залогиненного юзера
     return (
       <li
-        key={user.id}
+        key={uuid()}
         className={classNames('leaderboard__user', {
           leaderboard__user_current: user.id === currUser.id,
         })}
         style={{ width: `${width}%` }}>
-        {`${userNumber}.  ${user.name}`}
+        <span className='leaderboard__user-text'>
+          {`${user.order}.  ${user.first_name} ${user.second_name}  ${user.towerDefenceScore}`}
+        </span>
       </li>
     );
   });
-
   return (
     <div className='container-content bg-image_login container_start'>
-      <div className='container_center colum-7'>
-        <Title text='Рейтинг игроков' />
-        <div className='leaderboard__user-container'>{ratingList}</div>
-      </div>
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className='container_center colum-7'>
+          <Title text='Рейтинг игроков' />
+          <div className='leaderboard__user-container'>{ratingList}</div>
+        </div>
+      )}
     </div>
   );
 };

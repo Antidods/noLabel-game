@@ -113,3 +113,33 @@ export type ProfileType = {
   password: string;
   confirmPassword: string;
 };
+
+export type LeaderboardResponse = {
+  data: Record<'data', LeaderboardUserType>[];
+  status: number;
+  statusText: string;
+};
+
+export type LeaderboardUserType = {
+  id: number;
+  first_name: string;
+  second_name: string;
+  towerDefenceScore: number;
+  order?: number;
+  avatar?: string;
+};
+
+export type LeaderboardType = LeaderboardUserType[] | [];
+
+export type pushLeaderboardRequest = {
+  score: number;
+};
+
+export type APIResponseError = {
+  response: {
+    data: {
+      reason: string;
+    };
+    status: number;
+  };
+};
