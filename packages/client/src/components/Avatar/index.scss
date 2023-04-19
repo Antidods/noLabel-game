@@ -6,6 +6,13 @@
   border: 3px solid $color-ui-primary;
   border-radius: 50%;
   aspect-ratio: 1;
+  // анимация avatar при наведении
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px $color-ui-primary);
+  }
 
   // .avatar-active
   &-active {

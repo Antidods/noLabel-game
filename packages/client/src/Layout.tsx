@@ -30,26 +30,30 @@ function RequireAuth() {
 export const Layout = () => {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path='/' element={<StartScreen />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/registration' element={<Register />} />
-        <Route path='/about' element={<AboutUs />} />
-        <Route path='/devpage' element={<DevPage />} />
-        <Route element={<RequireAuth />}>
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/profile/change-password' element={<ChangePassword />} />
-          <Route path='/profile/change-avatar' element={<ChangeAvatar />} />
-          <Route path='/forum' element={<Forum />} />
-          <Route path='/forum/:id' element={<ForumTheme />} />
-          <Route path='/rating' element={<LeaderboardPage />} />
-          <Route path='/profile/edit' element={<ChangeProfile />} />
-          <Route path='/game' element={<Game />} />
-        </Route>
-        <Route path='/*' element={<Error404 />} />
-      </Routes>
-      <Footer />
+      <div className='left-image'></div>
+      <div className='content'>
+        <Header />
+        <Routes>
+          <Route path='/' element={<StartScreen />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/registration' element={<Register />} />
+          <Route path='/about' element={<AboutUs />} />
+          <Route path='/devpage' element={<DevPage />} />
+          <Route element={<RequireAuth />}>
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile/change-password' element={<ChangePassword />} />
+            <Route path='/profile/change-avatar' element={<ChangeAvatar />} />
+            <Route path='/forum' element={<Forum />} />
+            <Route path='/forum/:id' element={<ForumTheme />} />
+            <Route path='/rating' element={<LeaderboardPage />} />
+            <Route path='/profile/edit' element={<ChangeProfile />} />
+            <Route path='/game' element={<Game />} />
+          </Route>
+          <Route path='/*' element={<Error404 />} />
+        </Routes>
+        <Footer />
+      </div>
+      <div className='right-image'></div>
       <ToastContainer
         theme='dark'
         position='top-right'

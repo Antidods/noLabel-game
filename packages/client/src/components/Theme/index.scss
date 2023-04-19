@@ -56,6 +56,21 @@
       border: 3px solid $color-ui-button-border;
       border-radius: 9px;
       mix-blend-mode: normal;
+      // добавить анимацию для theme__item_active
+      animation: pulse 1s backwards;
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 $color-ui-primary;
+        }
+
+        70% {
+          box-shadow: 0 0 0 10px rgb(0 0 0 / 0%);
+        }
+
+        100% {
+          box-shadow: 0 0 0 0 rgb(0 0 0 / 0%);
+        }
+      }
     }
   }
 }

@@ -20,6 +20,31 @@ li {
 }
 
 #root {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  max-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.left-image {
+  width: 100%;
+  min-height: 100%;
+  background: $color-overlay;
+  background: url('@assets/images/background/bg_left.jpg') no-repeat center;
+  background-size: cover;
+}
+
+.right-image {
+  width: 100%;
+  min-height: 100%;
+  background: $color-overlay;
+  background: url('@assets/images/background/bg_right.jpg') no-repeat center;
+  background-size: cover;
+}
+
+.content {
   position: relative;
   display: flex;
   flex-direction: column;

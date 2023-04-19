@@ -19,6 +19,12 @@
     background: $color-header-footer-gradient;
     border-radius: 5px;
     box-shadow: 0 0 7px rgb(255 255 255 / 78%);
+    // анимация leaderboard__user при наведении
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.01);
+    }
 
     &-text {
       overflow: visible;

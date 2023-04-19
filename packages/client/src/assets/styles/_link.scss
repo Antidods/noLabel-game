@@ -33,9 +33,27 @@
 
   &:hover {
     color: $color-ui-primary;
-    filter: drop-shadow(0 0 9px $color-ui-primary);
-    transition-delay: inherit;
-    text-decoration-line: underline;
+
+    // анимация custom-link при наведении
+    animation: hover 0.5s forwards;
+    @keyframes hover {
+      0% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.05);
+        filter: drop-shadow(0 0 9px $color-ui-primary);
+        transition-delay: inherit;
+      }
+
+      100% {
+        transform: scale(1);
+        text-decoration-line: underline;
+        filter: drop-shadow(0 0 9px $color-ui-primary);
+        transition-delay: inherit;
+      }
+    }
   }
 
   &:disabled {
