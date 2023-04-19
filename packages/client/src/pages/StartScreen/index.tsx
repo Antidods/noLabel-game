@@ -1,11 +1,15 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@components/Button';
 import { Rating } from '@components/Leaderboard';
 import { LogoText } from '@components/LogoText';
 import { currentUser } from '@store/selectors';
+import { useAppDispatch } from '@utils/hooks/reduxHooks';
 import { Spacer } from '@ui/Spacer';
 import classNames from 'classnames';
+
+import { signInWithToken } from '@/components/Autification/slice';
 
 import './index.scss';
 import '@assets/styles/App.scss';
@@ -13,6 +17,16 @@ import '@assets/styles/App.scss';
 export const StartScreen = () => {
   const navigate = useNavigate();
   const user = useSelector(currentUser);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const params = new URL(document.location.href).searchParams;
+    const code = params.get('code');
+
+    if (code) {
+      window.history.pushState({}, '', 'http://localhost:3000/');
+      dispatch(signInWithToken({ code, navigate }));
+    }
+  }, []);
 
   return (
     <div className='container-content container-content_main bg-image'>
